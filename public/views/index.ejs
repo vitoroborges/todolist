@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="text-center">Tasks</h1>
+            <hr>
+            <% data.forEach(el => { %>
+            <div class="card-body">
+                <h5 class="card-title"><%= el.name %></h5>
+                <p class="card-text"><%= el.description %></p>
+                <form action="/task/edit/<%= el.id %>" method="get">
+                    <button class="btn btn-success">Edit</button>
+                </form>
+                <hr>
+            </div>
+            <%})%> 
+        </div>
+    </div> 
+    <%- include('../partials/footer') %>
+
