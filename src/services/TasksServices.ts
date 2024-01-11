@@ -16,11 +16,16 @@ class TasksServices {
         return result;
     }
 
-    async create(name: string, description: string){
+    async create(name: string, description: string, category_id?: any){
         if(name != undefined){
             try{
-                await db.insert({name: name, description: description, is_complete: false}).into("tasks")
-                return true;
+                if(category_id != undefined){
+                    await db.insert({name: name, description: description, is_complete: false, category_id: category_id}).into("tasks")
+                    return true;
+                } else{
+                    await db.insert({name: name, description: description, is_complete: false}).into("tasks")
+                    return true;
+                }
             } catch(err){
                 console.log(err);
                 return false;
@@ -40,10 +45,15 @@ class TasksServices {
         }
     }
 
-    async update(id: any, name: string, desc: string){
+    async update(id: any, name: string, desc: string, category_id?: any){
         try{
-            await db.update({name: name, description: desc}).from("tasks").where("id",id);
-            return true;
+            if(category_id != undefined){
+                await db.update({name: name, description: desc, category_id: category_id}).from("tasks").where("id",id);
+                return true;
+            } else{
+                await db.update({name: name, description: desc}).from("tasks").where("id",id);
+                return true;
+            }
         } catch(err){
             console.log(err);
             return false;
