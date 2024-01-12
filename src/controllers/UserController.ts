@@ -1,3 +1,4 @@
+import CategoryServices from "../services/CategoryServices";
 import TasksServices from "../services/TasksServices";
 import { Request, Response } from "express";
 
@@ -9,13 +10,15 @@ class UserController {
     } 
 
     async create(req: Request, res: Response){
-        res.render('../public/views/create');
+        let result = await CategoryServices.getAll();
+        res.render('../public/views/create', {data: result});
     }
 
     async save(req: Request, res: Response){
         let name = req.body.name;
         let description = req.body.description;
-        await TasksServices.create(name, description);
+        let category = req.body.category;
+        await TasksServices.create(name, description, category);
         res.redirect('/');
     }
 

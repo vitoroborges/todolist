@@ -8,6 +8,17 @@
                 <form action="/task/save" method="post">
                     <input type="text" name="name" id="name" placeholder="Name" class="form-control mb-3">
                     <input type="text" name="description" id="description" placeholder="Description" class="form-control mb-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label for="inputGroupSelect01" class="input-group-text">Category</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <% data.forEach(el => { %>
+                            <option value="<%=el.id%>" id="category" name="category"><%=el.name%></option>
+                            <% }) %>
+                        </select>
+                    </div>
                     <button class="btn btn-primary">Create</button>
                 </form>
             </div> 

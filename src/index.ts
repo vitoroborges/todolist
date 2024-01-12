@@ -1,5 +1,7 @@
 import express  from "express";
 import router from "./router";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
@@ -10,6 +12,6 @@ app.set("view engine", "ejs");
 
 app.use(router);
 
-app.listen(8080, () => {
+app.listen(process.env.PORT, () => {
     console.log("Server on");
 });
