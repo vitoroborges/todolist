@@ -6,10 +6,21 @@
         <div class="card mb-3">
             <div class="card-body">
                 <form action="/task/update" method="post">
-                    <% data.forEach(el => { %>
+                    <% task_data.forEach(el => { %>
                     <input type="hidden" id="id" name="id" value="<%=el.id%>">
                     <input type="text" name="name" id="name" value="<%= el.name%>" class="form-control mb-3">
                     <input type="text" name="description" id="description" value="<%= el.description%>" class="form-control mb-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label for="inputGroupSelect01" class="input-group-text">Category</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <% category_data.forEach(el => { %>
+                            <option value="<%=el.id%>" id="category" name="category"><%=el.name%></option>
+                            <% }) %>
+                        </select>
+                    </div>
                     <input type="submit" value="Save" class="btn btn-primary mb-3t">
                 </form>
                 <form action="/task/delete" method="post">

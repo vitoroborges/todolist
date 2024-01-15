@@ -24,20 +24,17 @@ class UserController {
 
     async edit(req: Request, res: Response){
         let id = req.params.id;
-        await TasksServices.getById(id)
-        .then(data => {
-            res.render('../public/views/edit', {data: data});
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        let task_data = await TasksServices.getById(id);
+        let category_data = await CategoryServices.getAll();
+        res.render('../public/views/edit', {task_data: task_data, category_data: category_data});
 
     }
     async update(req: Request, res: Response){
         let id = req.body.id;
         let name = req.body.name;
         let description = req.body.description;
-        await TasksServices.update(id, name, description);
+        let category = req.body.category;
+        await TasksServices.update(id, name, description, category);
         res.redirect('/')
     }
 }
